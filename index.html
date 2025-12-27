@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<!-- 最重要的视口设置 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+<title id="title"></title>
+<style>
+:root {
+    --bg: #ffffff;
+    --fg: #000000;
+    --card: #f3f3f3;
+    --primary: #007bff;
+    --primary-hover: #0056b3;
+}
+.dark {
+    --bg: #121212;
+    --fg: #e0e0e0;
+    --card: #1e1e1e;
+    --primary: #0d6efd;
+    --primary-hover: #0b5ed7;
+}
+
+body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: system-ui, sans-serif;
+    max-width: 480px;
+    margin: 20px auto;
+}
+.card {
+    background: var(--card);
+    padding: 10px;
+    border-radius: 6px;
+}
+input, select, button {
+    font-size: 16px;
+    margin: 6px 0;
+}
+
+/* 主题按钮 - 小尺寸 */
+#theme {
+    width: auto;
+    padding: 8px 16px;
+    height: auto;
+    min-height: 40px; /* 保持最小高度 */
+    font-size: 14px;
+    font-weight: normal;
+    background: var(--card);
+    color: var(--fg);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#theme:hover {
+    background: var(--bg);
+    border-color: var(--primary);
+}
+
+.dark #theme {
+    border-color: #555;
+}
+
+.dark #theme:hover {
+    border-color: var(--primary);
+}
+
+/* 开始按钮 - 大尺寸 */
+#startBtn {
+    width: 100%;
+    height: 64px;
+    font-size: 24px;
+    font-weight: bold;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#startBtn:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+#startBtn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 123, 255, 0.2);
+}
+
+/* 其他输入元素样式 */
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: var(--bg);
+    color: var(--fg);
+    box-sizing: border-box;
+}
+select {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: var(--bg);
+    color: var(--fg);
+    box-sizing: border-box;
+}
+.dark input, .dark select {
+    border-color: #555;
+    background: #2a2a2a;
+}
+
+canvas {
+    width: 100%;
+    height: 160px;
+    border: 1px solid #555;
+    margin-top: 10px;
+    justify-content: center;
+}
+
+.topbar {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+#lang {
+    flex-grow: 1;
+    height: 40px; /* 与主题按钮高度匹配 */
+}
+
+</style>
+</head>
+
+<body>
+
+<h2 id="caption"></h2>
+
+<div class="topbar">
+    <select id="lang">
+        <option value="zh-CN">简体中文</option>
+        <option value="zh-TW">繁體中文</option>
+        <option value="en">English</option>
+        <option value="ja">日本語</option>
+    </select>
+    <button id="theme"></button>
+</div>
+
+<div class="card">
+    <label id="lblM"></label>
+    <input id="mass" type="number" value="4.1">
+
+    <label id="lblW"></label>
+    <input id="width" type="number" value="10">
+
+    <label id="lblS"></label>
+    <input id="span" type="number" value="100">
+
+    <input type="range" min="0.3" max="5" step="0.1" value="3" id="mySlider">
+
+    <button id="startBtn"></button>
+    <p><label id="timeleft"></label><label id="countdown">--</label> / <span id="sliderValue">3.0</span></p>
+    <p><label id="l_now"></label><label id="nowT">--</label>&nbsp;&nbsp;
+    <label id="l_frc"></label><label id="nowf">--</label></p>
+
+    <p style="text-align: center">
+    <canvas id="curve"></canvas>
+    <span id="l_avg"></span><span id="avg">--</span>&nbsp;&nbsp;
+    <span id="l_max"></span><span id="max">--</span>&nbsp;&nbsp;
+    <span id="l_min"></span><span id="min">--</span>
+    </p>
+
+</div>
+
+<div class="card">
+    <span id="readme" style="white-space: pre-wrap"></span>
+    <p style="font-family: 'Times New Roman', serif; text-align: center"><big><em>T = 4 · M · W · f ² · S ²</em></big></p>
+    <p><span id="friend"></span>
+    <a href = "https://20508888.xyz/" target= "_blank">Malvern's Blog</a>&nbsp;
+    <a href = "https://github.com/MalvernLove/Acoustic-Belt-Tension-Meter" target= "_blank">GitHub</a>&nbsp;
+    <a href = "https://uf.20508888.xyz/" target= "_blank">Malvernの状态监测</a></p>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
