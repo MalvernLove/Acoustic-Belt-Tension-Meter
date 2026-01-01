@@ -1,4 +1,4 @@
-# 音波式皮带张力计（Web 版）
+# 音波式皮带张力计（Web版）
 
 基于**皮带固有振动频率**的音波式张力测量工具，使用浏览器麦克风采集声音，通过频谱分析计算皮带张力，并自动识别稳定振动区间，仅对稳定段进行统计，接近商用音波张力计的工作逻辑。
 
@@ -34,7 +34,7 @@ $` T = 4 \times M \times W \times S^2 \times f^2 \times 10^{-9} `$
 说明：
 
 * 该形式与日本Gates等音波式张力计的工程公式一致
-* $`(10^{-9})`$来自单位换算（g→kg，mm→m）
+* $`10^{-9}`$来自单位换算（g→kg，mm→m）
 
 ---
 
@@ -86,11 +86,13 @@ $` T = 4 \times M \times W \times S^2 \times f^2 \times 10^{-9} `$
 
 ### 1. 本地运行
 
+在当前目录下，
 ```bash
-cd %~dp0
 python -m http.server 8000
-start http://localhost:8000
 ```
+浏览器访问http://localhost:8000
+
+或使用[Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)。
 
 > ⚠️ 必须使用 HTTP 访问，`file://` 无法调用麦克风。
 
@@ -99,17 +101,14 @@ start http://localhost:8000
 ### 2. 测量步骤
 
 1. 输入：
-
    * 单位质量 M
    * 皮带宽度 W
    * 跨距 S
 2. 点击 **开始测量**
 3. 在3秒内：
-
    * 用手指、工具轻敲皮带
    * 避免持续噪声或说话
 4. 测量结束后：
-
    * 查看张力曲线
    * 读取稳定段统计值
 
