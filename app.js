@@ -145,7 +145,7 @@ const sliderValue = document.getElementById("sliderValue");
 slider.addEventListener("input", function () {
    sliderValue.textContent = parseFloat(this.value).toFixed(1);
 });
-const RECORD_MS = parseFloat(slider.value) * 1000;
+let RECORD_MS = parseFloat(slider.value) * 1000;
 const STABLE_WINDOW = 200;   // ms
 const STABLE_RATIO  = 0.05;  // 5%
 const STABLE_MIN_MS = 500;   // ms
@@ -227,7 +227,7 @@ function drawCurve() {
 
     ctx.beginPath();
     series.forEach((p,i)=>{
-        const x = p.t / RECORD_MS * canvas.width;
+        const x = p.t / RECORD_MS * canvas.width ;
         const y = canvas.height - (p.T - minT) / span * canvas.height;
         i ? ctx.lineTo(x,y) : ctx.moveTo(x,y);
     });
@@ -288,6 +288,7 @@ function loop() {
         series.push({ t, T });
 
         $("nowT").textContent = `${T.toFixed(1)} N`;
+        $("nowf").textContent = `${f.toFixed(1)} Hz`;
         drawCurve();
     }
 
@@ -303,6 +304,8 @@ function loop() {
 
 /* ================= 启动 ================= */
 $("startBtn").onclick = async () => {
+
+    RECORD_MS = Number(slider.value) * 1000;
 
     series = [];
     stableSeries = [];
